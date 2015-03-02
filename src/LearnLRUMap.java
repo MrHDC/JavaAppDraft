@@ -14,7 +14,7 @@ public class LearnLRUMap {
         learnLRUMap.init(map);
 
         int n = 0;
-        while (n != 7) {
+        while (n != 8) {
             learnLRUMap.menu();
             n = scanner.nextInt();
             System.out.println("==Your choice: " + n);
@@ -59,7 +59,7 @@ public class LearnLRUMap {
         User tran = new User(3, "Tran", 21);
         User quan = new User(4, "Quan", 23);
         User trung = new User(5, "Trung", 24);
-        Animal animal = new Animal("Dog");
+        Animal animal = new Animal(6,"Dog");
 
         map.put(cong.id, cong);
         map.put(chien.id, chien);
@@ -78,20 +78,20 @@ public class LearnLRUMap {
                 System.out.print(" -id: ");
                 int id = scanner.nextInt();
                 scanner.nextLine();
-//                System.out.print( " -name: ");
-//                String name = scanner.nextLine();
-//                System.out.print( " -age: ");
-//                int age = scanner.nextInt();
-//                User user = new User(id, name, age);
-//                map.put(id, user);
-//                if (map.get(user.id)!=null)
-//                    System.out.println("Add success User " + user.id + " - " + user.name + " - " + user.age + " success");
-//                else
-//                    System.out.println("Faild");
-                System.out.print(" -type: ");
-                String type = scanner.nextLine();
-                Animal animal = new Animal(type);
-                map.put(id, animal);
+                System.out.print( " -name: ");
+                String name = scanner.nextLine();
+                System.out.print( " -age: ");
+                int age = scanner.nextInt();
+                User user = new User(id, name, age);
+                map.put(id, user);
+                if (map.get(user.id)!=null)
+                    System.out.println("Add success User " + user.id + " - " + user.name + " - " + user.age + " success");
+                else
+                    System.out.println("Faild");
+//                System.out.print(" -type: ");
+//                String type = scanner.nextLine();
+//                Animal animal = new Animal(type);
+//                map.put(id, animal);
                 break;
             case 2:
                 System.out.print(" -Hay nhap key: ");
@@ -118,10 +118,14 @@ public class LearnLRUMap {
                 show(map);
                 break;
             case 6:
-                System.out.println("Chua lam");
+                clear(map);
+                break;
+            case 7:
+                System.out.print(" -Nhap key: ");
+                remove(map,scanner.nextInt());
                 break;
             default:
-                b = 7;
+                b = 8;
                 break;
         }
     }
@@ -134,13 +138,26 @@ public class LearnLRUMap {
                 "\n3. Xoa Phan Tu" +
                 "\n4. Check Size" +
                 "\n5. Show" +
+                "\n6. Clear All" +
+                "\n7. Remove" +
                 "\n--------------" +
                 "\n > ");
     }
 
-    public LRUMap createLRUMap(String name, int maxsize){
+    public LRUMap createLRUMap(int maxsize){
         LRUMap map = new LRUMap(maxsize);
         return map;
+    }
+
+    public void clear(LRUMap map){
+        map.clear();
+        if (map.size()==0){
+            System.out.println("Clear Success");
+        }else
+            System.out.printf("Clear Fail");
+    }
+    public void remove(LRUMap map, int key){
+        map.remove(key);
     }
 
 }
@@ -162,11 +179,13 @@ class User {
 }
 
 class Animal{
+    public int id;
     public String type;
-    public Animal(String type){
+    public Animal(int id, String type){
+        this.id = id;
         this.type = type;
     }
     public void show(){
-        System.out.println("\t" + type);
+        System.out.println("\t" + id + "\t"+type);
     }
 }
