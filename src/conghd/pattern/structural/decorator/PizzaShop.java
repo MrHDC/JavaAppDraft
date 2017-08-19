@@ -22,5 +22,7 @@ public class PizzaShop {
         // add more cheese to chicken pizza
         CheeseDecorator cheese2 = new CheeseDecorator(cheese);
         System.out.println(cheese2.doPizza());
+
+        System.out.println(tomato.doPizza());
     }
 }
